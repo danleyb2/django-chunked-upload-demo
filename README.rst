@@ -22,7 +22,7 @@ Try it locally
 
 ::
 
-    virtualenv ven
+    virtualenv venv
     source venv/bin/activate
     pip install -r requirements.txt
 
