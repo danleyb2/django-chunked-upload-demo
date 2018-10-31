@@ -1,4 +1,4 @@
 wsgiref==0.1.2
-gunicorn==19.0.0
-Django==1.6.5
+gunicorn==19.9.0
+Django==1.8.19
 django-chunked-upload
