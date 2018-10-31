@@ -44,3 +44,16 @@ Support
 -------
 
 If you find any bug or you want to propose a new feature, please use the `issues tracker <https://github.com/juliomalegria/django-chunked-upload/issues>`__. I'll be happy to help you! :-)
+
+
+Fixes
+-------
+
+### Fix IOError
+
+Replace `self.file.write(chunk.read())` in models.py
+
+::
+
+    with open(self.file.path, 'ab') as f:
+      f.write(chunk.read())
