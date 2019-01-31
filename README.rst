@@ -3,6 +3,12 @@ django-chunked-upload demo
 
 This is a Django demo project of the `django-chunked-upload <https://github.com/juliomalegria/django-chunked-upload>`__ module.
 
+Working with
+============
+- Python 3.6.7
+- Django==2.1.4
+
+
 Live demo
 ---------
 
@@ -45,15 +51,3 @@ Support
 
 If you find any bug or you want to propose a new feature, please use the `issues tracker <https://github.com/juliomalegria/django-chunked-upload/issues>`__. I'll be happy to help you! :-)
 
-
-Fixes
--------
-
-### Fix IOError
-
-Replace `self.file.write(chunk.read())` in models.py
-
-::
-
-    with open(self.file.path, 'ab') as f:
-      f.write(chunk.read())

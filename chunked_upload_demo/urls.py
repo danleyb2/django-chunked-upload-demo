@@ -1,21 +1,23 @@
 from django.conf import settings
-from django.conf.urls import patterns, url
+from django.urls import path, include
+
+
+from django.contrib import admin
+admin.autodiscover()
 
 from demo.views import (
     ChunkedUploadDemo, MyChunkedUploadView, MyChunkedUploadCompleteView
 )
 
+urlpatterns = [
+    path('', ChunkedUploadDemo.as_view(), name='chunked_upload'),
+    path('api/chunked_upload/', MyChunkedUploadView.as_view(), name='api_chunked_upload'),
+    path('api/chunked_upload_complete/', MyChunkedUploadCompleteView.as_view(), name='api_chunked_upload_complete'),
+    path('admin/', admin.site.urls),
 
-urlpatterns = patterns(
-    '',
-    url(r'^/?$',
-        ChunkedUploadDemo.as_view(), name='chunked_upload'),
-    url(r'^api/chunked_upload/?$',
-        MyChunkedUploadView.as_view(), name='api_chunked_upload'),
-    url(r'^api/chunked_upload_complete/?$',
-        MyChunkedUploadCompleteView.as_view(),
-        name='api_chunked_upload_complete'),
-    url(r'^static/(.*)$',
-        'django.views.static.serve',
-        {'document_root': settings.STATIC_ROOT, 'show_indexes': False}),
-)
+]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
